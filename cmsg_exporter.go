@@ -55,6 +55,9 @@ type PCoIPSession struct {
 	HostIP      string
 	CMSGName    string
 	CMSGIP      string
+	ClientMac   string
+	ClientIp    string
+	ClientName  string
 }
 type PcoipAgentRequest struct {
 	Request       xml.Name `xml:"pcoip-agent"`
@@ -183,8 +186,8 @@ func getSessions(l []PCoIPLogEntry) map[string]*PCoIPSession {
 			sp := strings.Split(line.Message, ":")
 			myXML := strings.TrimSpace(strings.Join(sp[2:], ""))
 			pcoipBrokerRequest := parsePCoIPBrokerRequestXML(myXML)
-			session.CMSGName = pcoipBrokerRequest.Hello.ServerAddress.Hostname
-			session.CMSGIP = pcoipBrokerRequest.Hello.ServerAddress.IpAddress
+			session.CMSGName = pcoipBrokerRequest.Hello.PcmInfo.Hostname
+			session.CMSGIP = pcoipBrokerRequest.Hello.PcmInfo.IpAddress
 		}
 		// get username, dest hostname, dest ip
 		if strings.Contains(line.Message, "Sending request to PCoIP Agent") && line.Method == "PCoIPAgent" {
@@ -194,6 +197,9 @@ func getSessions(l []PCoIPLogEntry) map[string]*PCoIPSession {
 			session.Hostname = pcoipAgentRequest.LaunchSession.Hostname
 			session.HostIP = pcoipAgentRequest.LaunchSession.IpAddress
 			session.Username = pcoipAgentRequest.LaunchSession.Logon.Username
+			session.ClientIp = pcoipAgentRequest.LaunchSession.ClientIp
+			session.ClientName = pcoipAgentRequest.LaunchSession.ClientName
+			session.ClientMac = pcoipAgentRequest.LaunchSession.ClientMac
 		}
 		// get connect time
 		if strings.Contains(line.Message, "Received response from PCoIP Agent") && line.Method == "PCoIPAgent" {
