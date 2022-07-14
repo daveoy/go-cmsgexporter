@@ -243,7 +243,7 @@ func printSessionsOrdered(s map[string]*PCoIPSession) {
 
 func main() {
 	var listenAddress = flag.String("listen-address", ":9666", "The address to listen on for HTTP requests.")
-	var logdir = flag.String("log-dir", "/var/log/Teradici/ConnectionManager", "Path the directory containing pcoip connection manager logs.")
+	var logdir = flag.String("log-dir", "/var/log/Teradici/ConnectionManager/", "Path the directory containing pcoip connection manager logs.")
 	flag.Parse()
 	// set up metrics we're tracking
 	var labels = []string{"connect_time", "username", "hostname", "ip", "cmsg_name", "cmsg_ip"}
