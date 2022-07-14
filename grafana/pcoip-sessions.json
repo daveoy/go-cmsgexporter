@@ -1,0 +1,542 @@
+{
+	"annotations": {
+	  "list": [
+		{
+		  "builtIn": 1,
+		  "datasource": "-- Grafana --",
+		  "enable": true,
+		  "hide": true,
+		  "iconColor": "rgba(0, 211, 255, 1)",
+		  "name": "Annotations & Alerts",
+		  "target": {
+			"limit": 100,
+			"matchAny": false,
+			"tags": [],
+			"type": "dashboard"
+		  },
+		  "type": "dashboard"
+		}
+	  ]
+	},
+	"editable": true,
+	"fiscalYearStartMonth": 0,
+	"graphTooltip": 0,
+	"id": 153,
+	"iteration": 1657757848599,
+	"links": [],
+	"liveNow": false,
+	"panels": [
+	  {
+		"datasource": {
+		  "type": "prometheus",
+		  "uid": "000000017"
+		},
+		"fieldConfig": {
+		  "defaults": {
+			"color": {
+			  "mode": "thresholds"
+			},
+			"mappings": [],
+			"thresholds": {
+			  "mode": "absolute",
+			  "steps": [
+				{
+				  "color": "green",
+				  "value": null
+				},
+				{
+				  "color": "red",
+				  "value": 80
+				}
+			  ]
+			}
+		  },
+		  "overrides": []
+		},
+		"gridPos": {
+		  "h": 8,
+		  "w": 12,
+		  "x": 0,
+		  "y": 0
+		},
+		"id": 4,
+		"options": {
+		  "colorMode": "value",
+		  "graphMode": "area",
+		  "justifyMode": "auto",
+		  "orientation": "auto",
+		  "reduceOptions": {
+			"calcs": [
+			  "lastNotNull"
+			],
+			"fields": "",
+			"values": false
+		  },
+		  "textMode": "auto"
+		},
+		"pluginVersion": "8.3.0",
+		"repeat": "cmsg",
+		"repeatDirection": "h",
+		"targets": [
+		  {
+			"datasource": {
+			  "type": "prometheus",
+			  "uid": "000000017"
+			},
+			"exemplar": false,
+			"expr": "count(pcoip_sessions{cmsg_name=\"$cmsg\"})",
+			"instant": true,
+			"interval": "",
+			"legendFormat": "",
+			"refId": "A"
+		  }
+		],
+		"title": "$cmsg connection count",
+		"type": "stat"
+	  },
+	  {
+		"datasource": {
+		  "type": "prometheus",
+		  "uid": "000000017"
+		},
+		"fieldConfig": {
+		  "defaults": {
+			"color": {
+			  "mode": "thresholds"
+			},
+			"custom": {
+			  "align": "auto",
+			  "displayMode": "auto",
+			  "filterable": true
+			},
+			"mappings": [],
+			"thresholds": {
+			  "mode": "absolute",
+			  "steps": [
+				{
+				  "color": "green",
+				  "value": null
+				},
+				{
+				  "color": "red",
+				  "value": 80
+				}
+			  ]
+			}
+		  },
+		  "overrides": []
+		},
+		"gridPos": {
+		  "h": 15,
+		  "w": 24,
+		  "x": 0,
+		  "y": 8
+		},
+		"id": 2,
+		"options": {
+		  "footer": {
+			"fields": [],
+			"reducer": [
+			  "count"
+			],
+			"show": true
+		  },
+		  "showHeader": true,
+		  "sortBy": [
+			{
+			  "desc": false,
+			  "displayName": "connect_time"
+			}
+		  ]
+		},
+		"pluginVersion": "8.3.0",
+		"targets": [
+		  {
+			"datasource": {
+			  "type": "prometheus",
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 153,
+  "iteration": 1657757848599,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "000000017"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 4,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.3.0",
+      "repeat": "cmsg",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "Prometheus"
+          },
+          "exemplar": false,
+          "expr": "count(pcoip_sessions{cmsg_name=\"$cmsg\"})",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "$cmsg connection count",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "000000017"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto",
+            "filterable": true
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 15,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 2,
+      "options": {
+        "footer": {
+          "fields": [],
+          "reducer": [
+            "count"
+          ],
+          "show": true
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "connect_time"
+          }
+        ]
+      },
+      "pluginVersion": "8.3.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "Prometheus"
+          },
+          "exemplar": false,
+          "expr": "pcoip_sessions",
+          "format": "table",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "pcoip sessions",
+      "transformations": [
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "equal",
+                  "options": {
+                    "value": ""
+                  }
+                },
+                "fieldName": "connect_time"
+              }
+            ],
+            "match": "any",
+            "type": "exclude"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value #A": true,
+              "__name__": true,
+              "endpoint": true,
+              "instance": true,
+              "job": true,
+              "namespace": true,
+              "service": true
+            },
+            "indexByName": {
+              "Time": 0,
+              "Value #A": 13,
+              "__name__": 1,
+              "cmsg_ip": 3,
+              "cmsg_name": 2,
+              "connect_time": 4,
+              "endpoint": 5,
+              "hostname": 6,
+              "instance": 7,
+              "ip": 8,
+              "job": 9,
+              "namespace": 10,
+              "service": 11,
+              "username": 12
+            },
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "refresh": "10s",
+  "schemaVersion": 33,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "Prometheus"
+        },
+        "definition": "label_values(pcoip_sessions, cmsg_name)",
+        "hide": 2,
+        "includeAll": true,
+        "multi": true,
+        "name": "cmsg",
+        "options": [],
+        "query": {
+          "query": "label_values(pcoip_sessions, cmsg_name)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-15m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "pcoip sessions",
+  "uid": "yimBUee7z",
+  "version": 7,
+  "weekStart": ""
+}			},
+			"exemplar": false,
+			"expr": "pcoip_sessions",
+			"format": "table",
+			"instant": true,
+			"interval": "",
+			"legendFormat": "",
+			"refId": "A"
+		  }
+		],
+		"title": "pcoip sessions",
+		"transformations": [
+		  {
+			"id": "filterByValue",
+			"options": {
+			  "filters": [
+				{
+				  "config": {
+					"id": "equal",
+					"options": {
+					  "value": ""
+					}
+				  },
+				  "fieldName": "connect_time"
+				}
+			  ],
+			  "match": "any",
+			  "type": "exclude"
+			}
+		  },
+		  {
+			"id": "organize",
+			"options": {
+			  "excludeByName": {
+				"Time": true,
+				"Value #A": true,
+				"__name__": true,
+				"endpoint": true,
+				"instance": true,
+				"job": true,
+				"namespace": true,
+				"service": true
+			  },
+			  "indexByName": {
+				"Time": 0,
+				"Value #A": 13,
+				"__name__": 1,
+				"cmsg_ip": 3,
+				"cmsg_name": 2,
+				"connect_time": 4,
+				"endpoint": 5,
+				"hostname": 6,
+				"instance": 7,
+				"ip": 8,
+				"job": 9,
+				"namespace": 10,
+				"service": 11,
+				"username": 12
+			  },
+			  "renameByName": {}
+			}
+		  }
+		],
+		"type": "table"
+	  }
+	],
+	"refresh": "10s",
+	"schemaVersion": 33,
+	"style": "dark",
+	"tags": [],
+	"templating": {
+	  "list": [
+		{
+		  "current": {
+			"selected": true,
+			"text": [
+			  "All"
+			],
+			"value": [
+			  "$__all"
+			]
+		  },
+		  "datasource": {
+			"type": "prometheus",
+			"uid": "000000017"
+		  },
+		  "definition": "label_values(pcoip_sessions, cmsg_name)",
+		  "hide": 2,
+		  "includeAll": true,
+		  "multi": true,
+		  "name": "cmsg",
+		  "options": [],
+		  "query": {
+			"query": "label_values(pcoip_sessions, cmsg_name)",
+			"refId": "StandardVariableQuery"
+		  },
+		  "refresh": 2,
+		  "regex": "",
+		  "skipUrlSync": false,
+		  "sort": 0,
+		  "type": "query"
+		}
+	  ]
+	},
+	"time": {
+	  "from": "now-15m",
+	  "to": "now"
+	},
+	"timepicker": {},
+	"timezone": "",
+	"title": "pcoip sessions",
+	"uid": "yimBUee7z",
+	"version": 7,
+	"weekStart": ""
+  }
