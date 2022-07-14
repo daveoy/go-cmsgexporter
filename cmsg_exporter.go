@@ -49,16 +49,21 @@ type PCoIPLogEntry struct {
 }
 
 type PCoIPSession struct {
-	ConnectTime string
-	Username    string
-	Hostname    string
-	HostIP      string
-	CMSGName    string
-	CMSGIP      string
-	ClientMac   string
-	ClientIp    string
-	ClientName  string
+	ConnectStatus  string
+	ConnectTime    string
+	DisconnectTime string
+	Username       string
+	Hostname       string
+	HostIP         string
+	CMSGName       string
+	CMSGIP         string
+	ClientMac      string
+	ClientIp       string
+	ClientName     string
+	SessionTag     string
+	SessionID      string
 }
+
 type PcoipAgentRequest struct {
 	Request       xml.Name `xml:"pcoip-agent"`
 	Text          string   `xml:",chardata"`
@@ -201,14 +206,21 @@ func getSessions(l []PCoIPLogEntry) map[string]*PCoIPSession {
 			session.ClientName = pcoipAgentRequest.LaunchSession.ClientName
 			session.ClientMac = pcoipAgentRequest.LaunchSession.ClientMac
 		}
-		// get connect time
+		// get connect time, status, sessionID and store the log id too
 		if strings.Contains(line.Message, "Received response from PCoIP Agent") && line.Method == "PCoIPAgent" {
 			sp := strings.Split(line.Message, ":")
 			myXML := strings.TrimSpace(strings.Join(sp[2:], ""))
 			pcoipAgentResponse := parsePCoIPAgentResponseXML(myXML)
+			session.ConnectStatus = pcoipAgentResponse.LaunchSessionResp.ResultID
 			if pcoipAgentResponse.LaunchSessionResp.ResultID == "SUCCESSFUL" {
 				session.ConnectTime = line.Timestamp
+				session.SessionID = pcoipAgentResponse.LaunchSessionResp.SessionInfo.SessionID
+				session.SessionTag = line.SessionID
 			}
+		}
+		// get disconnect time
+		if strings.Contains(line.Message, "Sending response to client (bye-resp)") && line.Method == "PCoIPConnectionManagerPBPServlet" {
+			session.DisconnectTime = line.Timestamp
 		}
 	}
 	return sessions
@@ -253,7 +265,9 @@ func main() {
 	flag.Parse()
 	// set up metrics we're tracking
 	var labels = []string{
+		"connect_status",
 		"connect_time",
+		"disconnect_time",
 		"user_name",
 		"host_name",
 		"host_ip",
@@ -262,6 +276,8 @@ func main() {
 		"client_name",
 		"client_ip",
 		"client_mac",
+		"session_tag",
+		"session_id",
 	}
 	var pcoipSessions = prometheus.NewGaugeVec(prometheus.GaugeOpts{
 		Name: "pcoip_sessions",
@@ -280,7 +296,9 @@ func main() {
 			sessions := getSessions(logLines)
 			for _, session := range sessions {
 				pcoipSessions.WithLabelValues(
+					session.ConnectStatus,
 					session.ConnectTime,
+					session.DisconnectTime,
 					session.Username,
 					session.Hostname,
 					session.HostIP,
@@ -289,6 +307,8 @@ func main() {
 					session.ClientName,
 					session.ClientIp,
 					session.ClientMac,
+					session.SessionTag,
+					session.SessionID,
 				).Add(1)
 			}
 			time.Sleep(60 * time.Second)
