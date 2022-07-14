@@ -1,0 +1,44 @@
+kind: Service
+apiVersion: v1
+metadata:
+ name: cmsg-metrics
+ labels:
+  cmsg: metrics
+spec:
+ type: ClusterIP
+ ports:
+ - name: metrics
+   port: 9666
+   targetPort: 9666
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+ name: cmsg-metrics
+ labels:
+  cmsg: metrics
+subsets:
+  - addresses:
+    - ip: 10.163.131.68
+    - ip: 10.163.131.69
+    ports:
+      - name: metrics
+        port: 9666
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    release: kube-prometheus-kube-prometheus
+  name: cmsg-metrics
+  namespace: default
+spec:
+  endpoints:
+  - interval: 30s
+    port: metrics
+  selector:
+      matchLabels:
+          cmsg: metrics
+  namespaceSelector:
+      matchNames:
+      - default
