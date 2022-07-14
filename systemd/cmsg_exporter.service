@@ -3,6 +3,7 @@ Description=CM/SG prometheus metrics exporter
 After=connection_manager.service
 
 [Service]
+ExecStartPre=chcon --reference=/bin/bash /root/go-cmsgexporter/cmsg_exporter
 ExecStart=/root/go-cmsgexporter/cmsg_exporter
 WorkingDirectory=/root/go-cmsgexporter
 Restart=on-failure
