@@ -25,11 +25,11 @@ mill azure cmsg example
 ```
 export https_proxy=web-proxy.chi.themill.com:3128
 export http_proxy=web-proxy.chi.themill.com:3128
-yum install git
+yum -qy install git
 GIT_SSL_NO_VERIFY=true git clone https://github.ps.thmulti.com/davey/go-cmsgexporter.git
 cd go-cmsgexporter/
-(./cmsg_exporter -log-dir /var/log/Teradici/ConnectionManager/ &)
+cp systemd/cmsg_exporter.service /etc/systemd/system/
+systemctl start cmsg_exporter
 ```
 # TODO
-systemd unit file?
 use client MAC as unique session ID?
