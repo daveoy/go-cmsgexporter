@@ -21,6 +21,7 @@ subsets:
   - addresses:
     - ip: 10.163.131.68
     - ip: 10.163.131.69
+    - ip: 10.218.50.240
     ports:
       - name: metrics
         port: 9666
