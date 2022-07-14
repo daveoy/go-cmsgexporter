@@ -1,3 +1,3 @@
 export GOOS=linux
-export GOOS=amd64
+export GOARCH=amd64
 go build -o cmsg_exporter .
