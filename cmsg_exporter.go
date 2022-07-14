@@ -252,7 +252,17 @@ func main() {
 	var logdir = flag.String("log-dir", "/var/log/Teradici/ConnectionManager/", "Path the directory containing pcoip connection manager logs.")
 	flag.Parse()
 	// set up metrics we're tracking
-	var labels = []string{"connect_time", "username", "hostname", "ip", "cmsg_name", "cmsg_ip"}
+	var labels = []string{
+		"connect_time",
+		"user_name",
+		"host_name",
+		"host_ip",
+		"cmsg_name",
+		"cmsg_ip",
+		"client_name",
+		"client_ip",
+		"client_mac",
+	}
 	var pcoipSessions = prometheus.NewGaugeVec(prometheus.GaugeOpts{
 		Name: "pcoip_sessions",
 		Help: "PCoIP Sessions on this CM/SG",
@@ -276,6 +286,9 @@ func main() {
 					session.HostIP,
 					session.CMSGName,
 					session.CMSGIP,
+					session.ClientIp,
+					session.ClientName,
+					session.ClientMac,
 				).Add(1)
 			}
 			time.Sleep(60 * time.Second)
