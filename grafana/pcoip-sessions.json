@@ -22,7 +22,7 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": 153,
-  "iteration": 1657812668241,
+  "iteration": 1657814899270,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -35,6 +35,10 @@
         "defaults": {
           "color": {
             "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto"
           },
           "mappings": [],
           "thresholds": {
@@ -55,28 +59,28 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 8,
-        "x": 0,
+        "w": 12,
+        "x": 6,
         "y": 0
       },
       "id": 4,
       "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+        "footer": {
           "fields": "",
-          "values": false
+          "reducer": [
+            "sum"
+          ],
+          "show": false
         },
-        "textMode": "auto"
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "total"
+          }
+        ]
       },
       "pluginVersion": "8.3.0",
-      "repeat": "cmsg",
-      "repeatDirection": "h",
       "targets": [
         {
           "datasource": {
@@ -84,15 +88,48 @@
             "uid": "000000017"
           },
           "exemplar": false,
-          "expr": "count(pcoip_sessions{cmsg_name=\"$cmsg\"})",
+          "expr": "count(pcoip_sessions) by (cmsg_name)",
+          "format": "table",
           "instant": true,
           "interval": "",
           "legendFormat": "",
           "refId": "A"
         }
       ],
-      "title": "$cmsg connection count",
-      "type": "stat"
+      "title": "sessions per CM/SG",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "Value #A": "total"
+            }
+          }
+        },
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "equal",
+                  "options": {
+                    "value": ""
+                  }
+                },
+                "fieldName": "cmsg_name"
+              }
+            ],
+            "match": "any",
+            "type": "exclude"
+          }
+        }
+      ],
+      "type": "table"
     },
     {
       "datasource": {
@@ -143,7 +180,7 @@
         "sortBy": [
           {
             "desc": false,
-            "displayName": "connect_time"
+            "displayName": "cmsg_name"
           }
         ]
       },
@@ -258,7 +295,7 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
@@ -267,6 +304,6 @@
   "timezone": "",
   "title": "pcoip sessions",
   "uid": "yimBUee7z",
-  "version": 10,
+  "version": 11,
   "weekStart": ""
 }
