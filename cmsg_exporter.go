@@ -286,8 +286,8 @@ func main() {
 					session.HostIP,
 					session.CMSGName,
 					session.CMSGIP,
-					session.ClientIp,
 					session.ClientName,
+					session.ClientIp,
 					session.ClientMac,
 				).Add(1)
 			}
