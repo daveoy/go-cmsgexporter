@@ -219,7 +219,7 @@ func getSessions(l []PCoIPLogEntry) map[string]*PCoIPSession {
 			}
 		}
 		// get disconnect time
-		if strings.Contains(line.Message, "Sending response to client (bye-resp)") && line.Method == "PCoIPConnectionManagerPBPServlet" {
+		if strings.Contains(line.Message, "connection-closed") && line.Method == "PCoIPSecurityGatewayConnection" {
 			session.DisconnectTime = line.Timestamp
 		}
 	}
