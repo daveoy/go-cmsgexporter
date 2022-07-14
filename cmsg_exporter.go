@@ -183,8 +183,8 @@ func getSessions(l []PCoIPLogEntry) map[string]*PCoIPSession {
 			sp := strings.Split(line.Message, ":")
 			myXML := strings.TrimSpace(strings.Join(sp[2:], ""))
 			pcoipBrokerRequest := parsePCoIPBrokerRequestXML(myXML)
-			session.CMSGName = pcoipBrokerRequest.Hello.PcmInfo.Hostname
-			session.CMSGIP = pcoipBrokerRequest.Hello.PcmInfo.IpAddress
+			session.CMSGName = pcoipBrokerRequest.Hello.ServerAddress.Hostname
+			session.CMSGIP = pcoipBrokerRequest.Hello.ServerAddress.IpAddress
 		}
 		// get username, dest hostname, dest ip
 		if strings.Contains(line.Message, "Sending request to PCoIP Agent") && line.Method == "PCoIPAgent" {
