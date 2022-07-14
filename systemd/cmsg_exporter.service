@@ -1,0 +1,11 @@
+[Unit]
+Description=CM/SG prometheus metrics exporter
+After=connection_manager.service
+
+[Service]
+ExecStart=/root/go-cmsgexporter/cmsg_exporter
+WorkingDirectory=/root/go-cmsgexporter
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
